@@ -1,6 +1,6 @@
 import { CurrencyError } from "./errors/currency.error";
 import { CharCode, DecimalPrecision, MetalConversion } from "../resources/enums";
-import { isValidExchange, roundMetal, toScrap, toReclaimed, toRefined,convertMetal, toKeys, roundFloat, pluralize, createInclusiveString, roundBySign, convertExchangeToKeys } from "../lib/utils";
+import { isValidExchange, roundMetal, toScrap, toReclaimed, convertMetal, roundFloat, pluralize, createInclusiveString, roundBySign, convertExchangeToKeys } from "../lib/utils";
 
 /**
  * Represents the configuration options for the Currency class.
@@ -142,7 +142,15 @@ export class Currency {
      * @returns The total amount of scrap metal equivalent to the current `Currency` instance.
      */
     toScrap(exchange = 0): number {
-        return toScrap(exchange, this.keys, this.refined);
+        if (isValidExchange(this.keys, exchange)) {
+            throw new CurrencyError("An exchange value must be provided when the number of keys is greater than zero.");
+        }
+
+        const exchangeInScrap = toScrap(exchange);
+        const refinedInScrap = toScrap(this.refined);
+        const keysInScrap = this.keys * exchangeInScrap;
+
+        return keysInScrap + refinedInScrap;
     }
 
     /**
@@ -176,7 +184,15 @@ export class Currency {
      * @returns The total amount of reclaimed metal equivalent to the current `Currency` instance.
      */
     toReclaimed(exchange = 0): number {
-        return toReclaimed(exchange, this.keys, this.refined);
+        if (isValidExchange(this.keys, exchange)) {
+            throw new CurrencyError("An exchange value must be provided when the number of keys is greater than zero.");
+        }
+
+        const exchangeInReclaimed = toReclaimed(exchange);
+        const refinedInReclaimed = toReclaimed(this.refined);
+        const keysInReclaimed = this.keys * exchangeInReclaimed;
+
+        return roundMetal(keysInReclaimed + refinedInReclaimed);
     }
 
     /**
@@ -210,7 +226,11 @@ export class Currency {
      * @returns The total amount of refined metal equivalent to the current `Currency` instance.
      */
     toRefined(exchange = 0): number {
-        return toRefined(exchange, this.keys, this.refined);
+        if (isValidExchange(this.keys, exchange)) {
+            throw new CurrencyError("An exchange value must be provided when the number of keys is greater than zero.");
+        }
+
+        return roundMetal((this.keys * exchange) + this.refined);
     }
 
     /**
@@ -220,7 +240,8 @@ export class Currency {
      * @returns The updated `Currency` instance with the added keys.
      */    
     addKeys(keys: number, exchange = 0) {
-        const total = toKeys(exchange, this.keys, this.refined, DecimalPrecision.Four) + keys;
+        const refinedInKeys = exchange ? this.refined / exchange : 0;
+        const total = roundFloat(this.keys + keys + refinedInKeys, DecimalPrecision.Four);
 
         const currency = Currency.fromKeys(total, exchange);
 
@@ -245,7 +266,13 @@ export class Currency {
      * @returns The total amount of keys equivalent to the current `Currency` instance.
      */
     toKeys(exchange = 0): number {
-        return toKeys(exchange, this.keys, this.refined, DecimalPrecision.Two);
+        if (isValidExchange(this.refined, exchange)) {
+            throw new CurrencyError("An exchange value must be provided when the number of refined is greater than zero.");
+        }
+
+        const refinedInKeys = exchange ? this.refined / exchange : 0;
+
+        return roundFloat(this.keys + refinedInKeys, 2);
     }
 
     /**

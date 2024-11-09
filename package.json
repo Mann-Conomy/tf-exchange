@@ -1,7 +1,7 @@
 {
   "name": "@mann-conomy/tf-exchange",
   "version": "1.0.0",
-  "description": "",
+  "description": "A collection of Node.js classes for seamless conversion between TF2 currencies.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,12 +12,30 @@
     "lint": "eslint -c eslint.config.js .",
     "prepublishOnly": "npm run build",
     "build": "npm run clean && tsc",
+    "coverage": "jest --coverage",
     "clean": "rimraf dist",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mann-Conomy/tf-exchange.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "typescript",
+    "currency",
+    "tf2",
+    "exchange",
+    "rate",
+    "mann-conomy"
+  ],
+  "author": "The Mann-Conomy Team",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mann-Conomy/tf-exchange/issues"
+  },
+  "homepage": "https://github.com/Mann-Conomy/tf-exchange#readme",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@mann-conomy/tsconfig": "^1.1.0",
@@ -29,5 +47,12 @@
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=8.17.0"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
   }
 }
