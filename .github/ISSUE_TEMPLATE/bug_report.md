@@ -26,7 +26,7 @@ A clear and concise description of what you expected to happen.
 A clear and concise description of what happens.
 
 ## Minimal reproducible example
-Calling `total()` on an array of `Currencies` returns "Error calculating the sum of the currencies array...".
+Calling `sum()` on an array of `Currencies` returns "Error calculating the sum of the currencies array...".
 
 ```js
 import { Calculator, Currency } from "@mann-conomy/tf-exchange";
@@ -37,7 +37,7 @@ import { Calculator, Currency } from "@mann-conomy/tf-exchange";
 
         const currencies = [ Currency.fromKeys(1.15, 55), Currency.fromRefined(42.66, 55), Currency.fromKeys(4.74, 55) ];
 
-        const currency = calculator.total(currencies);
+        const currency = calculator.sum(currencies);
 
         console.log(currency.toKeys(55));
     } catch (error) {
