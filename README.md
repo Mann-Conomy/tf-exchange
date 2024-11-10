@@ -39,6 +39,8 @@ $ yarn test
 Easily convert between TF2 currencies with a single exchange rate for all arithmetic operations.
 
 ```js
+import { Calculator, Currency } from "@mann-conomy/tf-exchange";
+
 try {
     const calculator = new Calculator({ exchange: 66.88 });
 
