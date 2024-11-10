@@ -8,17 +8,6 @@ export enum MetalConversion {
 }
 
 /**
- * Represents various types of in-game currencies.
- */
-export enum CurrencyType {
-    Scrap = "scrap",
-    Reclaimed = "reclaimed",
-    Refined = "ref",
-    Key = "key",
-    Keys = "keys"
-}
-
-/**
  * Represents the precision level of decimal values.
  */
 export enum DecimalPrecision {
