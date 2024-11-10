@@ -1,4 +1,4 @@
-import { CharCode } from "../resources/enums";
+import { CharCode, MetalConversion } from "../resources/enums";
 
 /**
  * Rounds the amount of refined metal to the nearest valid increment
@@ -10,7 +10,7 @@ export function roundMetal(refined: number): number {
     const whole = Math.floor(absolute);
     const decimal = Math.round((absolute - whole) / 0.11);
 
-    const rounded = (whole + (9 === decimal ? 1 : 0.11 * decimal)).toFixed(2);
+    const rounded = (whole + (MetalConversion.Scrap === decimal ? 1 : 0.11 * decimal)).toFixed(2);
 
     return parseFloat(rounded) * (refined < 0 ? -1 : 1);
 }
@@ -40,7 +40,7 @@ export function roundInt(n: number): number {
  * @returns The converted number of scrap metal.
  */
 export function toScrap(refined: number): number {
-    return roundInt(Math.round(9 * refined * 100) / 100);
+    return roundInt(Math.round(MetalConversion.Scrap * refined * 100) / 100);
 }
 
 /**
@@ -49,7 +49,7 @@ export function toScrap(refined: number): number {
  * @returns The converted number of reclaimed metal.
  */
 export function toReclaimed(refined: number): number {
-    return roundMetal(Math.round(3 * refined * 100) / 100);
+    return roundMetal(Math.round(MetalConversion.Reclaimed * refined * 100) / 100);
 }
 
 /**
@@ -70,7 +70,7 @@ export function roundFloat(value: number, decimal = 2) {
  */
 export function isValidExchange(currency: number, exchange: number): boolean {
     if (!(exchange >= 0)) {
-        throw new RangeError("The exchange rate must be equal to or greater than zero.");
+        throw new RangeError("Exchange rate cannot be negative.");
     }
 
     return currency > 0 && !(exchange > 0);
@@ -95,9 +95,9 @@ export function createInclusiveString(text: string, value: number, ) {
  * @returns The pluralized text followed by a comma with the formatted value`.
  */
 export function pluralize(text: string, value: number) {
-    const suffix = String.fromCharCode(115);
+    const suffix = String.fromCharCode(CharCode.Plural);
     const keys = value === 1 ? text : text.concat(suffix);
-    const separator = String.fromCharCode(44);
+    const separator = String.fromCharCode(CharCode.Comma);
 
     return createInclusiveString(keys.concat(separator), value);
 }

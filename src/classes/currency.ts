@@ -34,7 +34,7 @@ export class Currency {
      * @param currency The initial number of keys and refined metal to set up this `Currency` instance.
      */
     constructor(currency: Partial<ICurrency> = {}) {
-        this.keys = currency.keys || 0;
+        this.keys = roundFloat(currency.keys || 0);
         this.refined = roundMetal(currency.refined || 0);
     }
 
@@ -272,7 +272,7 @@ export class Currency {
 
         const refinedInKeys = exchange ? this.refined / exchange : 0;
 
-        return roundFloat(this.keys + refinedInKeys, 2);
+        return roundFloat(this.keys + refinedInKeys, DecimalPrecision.Two);
     }
 
     /**
