@@ -1,6 +1,6 @@
 {
   "name": "@mann-conomy/tf-exchange",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of Node.js classes for fast and easy conversion between TF2 currencies.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
