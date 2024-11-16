@@ -1,6 +1,6 @@
 # tf-exchange
 
-A collection of Node.js classes for easy conversion between TF2 currencies.
+A collection of Node.js classes for fast and easy conversion between TF2 currencies.
 
 [![npm version](https://img.shields.io/npm/v/@mann-conomy/tf-exchange?style=flat-square&logo=npm)](https://npmjs.com/package/@mann-conomy/tf-exchange)
 [![npm downloads](https://img.shields.io/npm/d18m/@mann-conomy/tf-exchange?style=flat-square&logo=npm)](https://npmjs.com/package/@mann-conomy/tf-exchange)
@@ -51,7 +51,7 @@ try {
 
     console.log(currency.toString()); // 2 keys, 43.44 refined
 } catch (error) {
-    console.error("Error adding the two currencies", error.message);
+    console.error("Error subtracting the two currencies", error.message);
 }
 ```
 
