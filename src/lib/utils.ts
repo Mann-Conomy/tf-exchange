@@ -63,12 +63,12 @@ export function roundFloat(value: number, decimal = 2) {
 }
 
 /**
- * Checks if the provided exchange rate is valid.
+ * Checks if the provided exchange rate is invalid.
  * @param currency The currency value to check against the exchange rate.
  * @param exchange The exchange rate to convert from refined metal to keys.
- * @returns True if the currency and exchange rate is valid, otherwise false.
+ * @returns True if the currency and exchange rate is invalid, otherwise false.
  */
-export function isValidExchange(currency: number, exchange: number): boolean {
+export function isInvalidExchange(currency: number, exchange: number): boolean {
     if (!(exchange >= 0)) {
         throw new RangeError("Exchange rate cannot be negative.");
     }
