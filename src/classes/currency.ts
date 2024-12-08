@@ -1,6 +1,6 @@
 import { CurrencyError } from "./errors/currency.error";
 import { CharCode, DecimalPrecision, MetalConversion } from "../resources/enums";
-import { isValidExchange, roundMetal, toScrap, toReclaimed, convertMetal, roundFloat, pluralize, createInclusiveString, roundBySign, convertExchangeToKeys } from "../lib/utils";
+import { isInvalidExchange, roundMetal, toScrap, toReclaimed, convertMetal, roundFloat, pluralize, createInclusiveString, roundBySign, convertExchangeToKeys } from "../lib/utils";
 
 /**
  * Represents the configuration options for the Currency class.
@@ -99,7 +99,7 @@ export class Currency {
         const keys = roundBySign(value);
         const refinedInKeys = roundFloat(value - keys, DecimalPrecision.Four);
 
-        if (isValidExchange(refinedInKeys, exchange)) {
+        if (isInvalidExchange(refinedInKeys, exchange)) {
             throw new CurrencyError("An exchange value must be provided when the number of refined is greater than zero.");
         }
 
@@ -142,7 +142,7 @@ export class Currency {
      * @returns The total amount of scrap metal equivalent to the current `Currency` instance.
      */
     toScrap(exchange = 0): number {
-        if (isValidExchange(this.keys, exchange)) {
+        if (isInvalidExchange(this.keys, exchange)) {
             throw new CurrencyError("An exchange value must be provided when the number of keys is greater than zero.");
         }
 
@@ -184,7 +184,7 @@ export class Currency {
      * @returns The total amount of reclaimed metal equivalent to the current `Currency` instance.
      */
     toReclaimed(exchange = 0): number {
-        if (isValidExchange(this.keys, exchange)) {
+        if (isInvalidExchange(this.keys, exchange)) {
             throw new CurrencyError("An exchange value must be provided when the number of keys is greater than zero.");
         }
 
@@ -226,7 +226,7 @@ export class Currency {
      * @returns The total amount of refined metal equivalent to the current `Currency` instance.
      */
     toRefined(exchange = 0): number {
-        if (isValidExchange(this.keys, exchange)) {
+        if (isInvalidExchange(this.keys, exchange)) {
             throw new CurrencyError("An exchange value must be provided when the number of keys is greater than zero.");
         }
 
@@ -266,7 +266,7 @@ export class Currency {
      * @returns The total amount of keys equivalent to the current `Currency` instance.
      */
     toKeys(exchange = 0): number {
-        if (isValidExchange(this.refined, exchange)) {
+        if (isInvalidExchange(this.refined, exchange)) {
             throw new CurrencyError("An exchange value must be provided when the number of refined is greater than zero.");
         }
 
