@@ -5,7 +5,7 @@ import { isInvalidExchange, roundMetal, toScrap, toReclaimed, convertMetal, roun
 /**
  * Represents the configuration options for the Currency class.
  */
-export interface ICurrency {
+export interface CurrencyOptions {
     /**
      * The number of keys associated with this currency (the primary unit).
      */
@@ -33,7 +33,7 @@ export class Currency {
      * Creates a new instance of `Currency`.
      * @param currency The initial number of keys and refined metal to set up this `Currency` instance.
      */
-    constructor(currency: Partial<ICurrency> = {}) {
+    constructor(currency: Partial<CurrencyOptions> = {}) {
         this.keys = roundFloat(currency.keys || 0);
         this.refined = roundMetal(currency.refined || 0);
     }
@@ -304,7 +304,7 @@ export class Currency {
      * Converts the Currency to a JSON object.
      * @returns The JSON representation of the Currency object.
      */
-    json(): ICurrency {
+    json(): CurrencyOptions {
         return {
             keys: this.keys,
             refined: this.refined

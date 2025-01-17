@@ -3,7 +3,7 @@ import { Currency } from "./currency";
 /**
  * Represents the configuration options for the Calculator class.
  */
-export interface ICalculator {
+export interface CalculatorOptions {
     /**
      * The exchange rate to convert from keys to refined metal.
      */
@@ -20,7 +20,7 @@ export class Calculator {
      * Creates a new instance of `Calculator`.
      * @param options Exchange rate options for the calculator.
      */
-    constructor(options: Partial<ICalculator> = {}) {
+    constructor(options: Partial<CalculatorOptions> = {}) {
         this.exchange = options.exchange || 0;
 
         if (!(this.exchange >= 0)) {
