@@ -1,5 +1,5 @@
-import { Currency, type ICurrency } from "./classes/currency";
-import { Calculator, type ICalculator } from "./classes/calculator";
+import { Currency, type CurrencyOptions } from "./classes/currency";
+import { Calculator, type CalculatorOptions } from "./classes/calculator";
 
 export {
     Currency,
@@ -7,6 +7,6 @@ export {
 };
 
 export type {
-    ICurrency,
-    ICalculator
+    CurrencyOptions as ICurrency,
+    CalculatorOptions as ICalculator
 };

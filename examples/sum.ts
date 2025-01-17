@@ -6,7 +6,7 @@ try {
     const calculator = new Calculator({ exchange: 55 });
 
     // Create an array of currencies to sum using the same exchange rate
-    const currencies = [ Currency.fromKeys(1.15, 55), Currency.fromRefined(42.66, 55), Currency.fromKeys(4.74, 55) ];
+    const currencies = [Currency.fromKeys(1.15, 55), Currency.fromRefined(42.66, 55), Currency.fromKeys(4.74, 55)];
 
     // Sum the currencies into a single Currency instance
     const currency = calculator.sum(currencies);

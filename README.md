@@ -65,4 +65,4 @@ See the [Wiki pages](https://github.com/Mann-Conomy/tf-exchange/wiki) for furthe
 
 [MIT](LICENSE)
 
-Copyright 2024, The Mann-Conomy Project
+Copyright 2025, The Mann-Conomy Project
